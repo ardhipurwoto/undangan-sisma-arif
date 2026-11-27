@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Pernikahan Sisma &amp; Arif</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="min-h-screen flex justify-center">
+  <div class="theme-modern inv-surface w-full max-w-[480px] shadow-2xl min-h-screen relative overflow-x-clip">
+
+
+        <!-- COVER OVERLAY (DAPAT DI ON/OFF & DIBUKA DENGAN ANIMASI TRANSISI) -->
+        <div id="invCoverOverlay" class="cover-transition relative w-full min-h-[780px] flex flex-col justify-between items-center text-center p-8 text-white z-40 bg-stone-900 fixed inset-0 z-50 min-h-screen max-w-[480px] mx-auto" style="display: flex; opacity: 1; transform: translateY(0px);" data-opened="false">
+          <img id="pv_coverBg" src="assets/foto-1.jpg" alt="Cover Pernikahan" class="absolute inset-0 w-full h-full object-cover opacity-55 transition-transform duration-1000 scale-105">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80"></div>
+
+          <div class="relative z-10 mt-6 space-y-2 animate-hero-in">
+            <p id="pv_coverSubtitle" class="text-xs uppercase tracking-[0.3em] text-amber-200/90 font-medium">THE WEDDING OF</p>
+            <h2 class="font-script text-5xl sm:text-6xl text-white drop-shadow-md">
+              <span id="pv_coverGroom">Sisma</span> &amp; <span id="pv_coverBride">Arif</span>
+            </h2>
+            <p id="pv_coverDateText" class="text-sm tracking-[0.2em] text-stone-200 pt-1">Minggu, 27 Desember 2026 </p>
+          </div>
+
+          <div class="relative z-10 w-full max-w-xs mb-6 p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/25 space-y-3 animate-hero-in" style="animation-delay: 0.15s;">
+            <p class="text-xs text-stone-200">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <p id="pv_guestName" class="text-lg font-bold text-white tracking-wide">TAMU UNDANGAN</p>
+            <div class="pt-1">
+              <button type="button" onclick="openInvitation()" class="w-full py-3 px-5 rounded-xl bg-white text-stone-900 font-semibold text-sm tracking-wide shadow-lg hover:bg-amber-50 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail-open" aria-hidden="true" class="lucide lucide-mail-open w-4 h-4"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"></path><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"></path></svg>
+                <span>Buka Undangan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STICKY TOP HEADER NAVIGATION BAR (SELALU ADA DI SEMUA HALAMAN) -->
+        <header id="invTopHeader" class="sticky top-0 z-30 w-full inv-card/95 backdrop-blur-md border-b inv-border shadow-sm px-2 py-2.5">
+          <nav class="flex items-center justify-around text-xs font-semibold">
+            <button type="button" onclick="scrollToSection('sec_hero')" class="flex flex-col items-center gap-0.5 inv-primary-text hover:opacity-75 transition px-1.5 py-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" aria-hidden="true" class="lucide lucide-home w-4 h-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              <span>Home</span>
+            </button>
+            <button type="button" onclick="scrollToSection('sec_couple')" id="nav_couple" class="flex flex-col items-center gap-0.5 inv-muted hover:inv-primary-text transition px-1.5 py-0.5 is-visible" style="display: flex;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart" aria-hidden="true" class="lucide lucide-heart w-4 h-4"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path></svg>
+              <span>Mempelai</span>
+            </button>
+            <button type="button" onclick="scrollToSection('sec_events')" id="nav_events" class="flex flex-col items-center gap-0.5 inv-muted hover:inv-primary-text transition px-1.5 py-0.5 is-visible" style="display: flex;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" aria-hidden="true" class="lucide lucide-calendar w-4 h-4"><path d="M8 2v3"></path><path d="M16 2v3"></path><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path></svg>
+              <span>Acara</span>
+            </button>
+            <button type="button" onclick="scrollToSection('sec_gallery')" id="nav_gallery" class="flex flex-col items-center gap-0.5 inv-muted hover:inv-primary-text transition px-1.5 py-0.5 is-visible" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="image" aria-hidden="true" class="lucide lucide-image w-4 h-4"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+              <span>Galeri</span>
+            </button>
+            <button type="button" onclick="scrollToSection('sec_rsvp')" id="nav_rsvp" class="flex flex-col items-center gap-0.5 inv-muted hover:inv-primary-text transition px-1.5 py-0.5 is-visible" style="display: flex;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="message-circle" aria-hidden="true" class="lucide lucide-message-circle w-4 h-4"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
+              <span>Ucapan</span>
+            </button>
+          </nav>
+        </header>
+
+        <!-- FLOATING MUSIC CONTROLS (PLAY/PAUSE & MUTE/UNMUTE) -->
+        <div id="floatingMusicControls" class="fixed bottom-5 right-5 z-30 flex flex-col gap-2" style="display: flex;">
+          <button type="button" id="floatingMusicBtn" onclick="toggleAudioMusic()" title="Putar / Hentikan Musik" class="w-10 h-10 rounded-full inv-primary-bg text-white shadow-lg flex items-center justify-center hover:scale-105 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="disc-3" aria-hidden="true" id="musicDiscIcon" class="lucide lucide-disc-3 w-5 h-5 animate-spin-slow paused-spin"><circle cx="12" cy="12" r="10"></circle><path d="M6 12c0-1.7.7-3.2 1.8-4.2"></path><circle cx="12" cy="12" r="2"></circle><path d="M18 12c0 1.7-.7 3.2-1.8 4.2"></path></svg>
+          </button>
+          <button type="button" id="floatingMuteBtn" onclick="toggleMuteMusic()" title="Mute / Unmute Lagu" class="w-10 h-10 rounded-full inv-card border inv-border inv-primary-text shadow-lg flex items-center justify-center hover:scale-105 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="volume-2" aria-hidden="true" id="musicMuteIcon" class="lucide lucide-volume-2 w-4 h-4"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>
+          </button>
+        </div>
+        <audio id="bgAudioPlayer" loop="" preload="none" src="assets/backsound.mp3"></audio>
+
+        <!-- ISI UTAMA UNDANGAN (UKURAN TEKS ISI DINAIKKAN +2 POINT AGAR LEBIH JELAS) -->
+        <div class="font-body pb-12 text-[15px] leading-relaxed">
+
+          <!-- HERO SECTION -->
+          <section id="sec_hero" class="relative px-6 pt-8 pb-10 text-center space-y-5 reveal-section is-visible scroll-mt-14">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full inv-soft-bg inv-primary-text text-xs font-bold uppercase tracking-[0.2em]">
+              <span>Undangan Pernikahan</span>
+            </div>
+
+            <div class="mx-auto w-56 h-72 rounded-t-full rounded-b-3xl overflow-hidden border-4 inv-border shadow-xl relative animate-float">
+              <img id="pv_heroPhoto" src="assets/foto-1.jpg" alt="Mempelai" class="w-full h-full object-cover">
+            </div>
+
+            <div class="space-y-1.5 pt-2">
+              <h1 class="font-script text-5xl inv-primary-text">
+                <span id="pv_heroGroom">Sisma</span> &amp; <span id="pv_heroBride">Arif</span>
+              </h1>
+              <p id="pv_heroDate" class="text-sm uppercase tracking-[0.22em] inv-muted font-medium">Minggu, 27 Desember 2026 </p>
+            </div>
+          </section>
+
+          <!-- QUOTE / AYAT SUCI -->
+          <section id="sec_quote" class="px-6 py-8 reveal-section scroll-mt-14 is-visible">
+            <div class="p-6 rounded-3xl inv-card border inv-border text-center space-y-3 shadow-sm transition-transform duration-500 hover:-translate-y-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-5 h-5 mx-auto inv-primary-text opacity-80"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+              <p id="pv_quoteText" class="text-sm sm:text-base italic leading-relaxed inv-muted">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang.”</p>
+              <p id="pv_quoteSource" class="text-xs font-bold inv-primary-text uppercase tracking-wider">QS. Ar-Rum : 21</p>
+            </div>
+          </section>
+
+          <!-- PROFIL MEMPELAI -->
+          <section id="sec_couple" class="px-6 py-8 text-center space-y-8 reveal-section scroll-mt-14 is-visible">
+            <div class="space-y-2">
+              <p class="text-xs uppercase tracking-[0.25em] inv-primary-text font-semibold">Assalamu’alaikum Wr. Wb.</p>
+              <p class="text-sm inv-muted leading-relaxed">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami:</p>
+            </div>
+
+            <!-- Pria -->
+            <div class="space-y-3">
+              <div id="pv_groomPhotoWrap" class="w-36 h-36 mx-auto rounded-full overflow-hidden border-4 inv-border shadow-md transition-transform duration-500 hover:scale-105 is-visible" style="display: none;">
+                <img id="pv_groomPhoto" src="assets/foto-2.jpg" alt="Mempelai Pria" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h3 id="pv_groomFull" class="font-heading text-2xl font-bold">APT. Sismawati Anggraeni, S. Farm</h3>
+                <p id="pv_groomParents" class="text-sm inv-muted mt-1.5 leading-relaxed">Putri pertama dari pasangan Bapak Suyoto dan Ibu Sri Wantini </p>
+                <p id="pv_groomIg" class="text-xs inv-primary-text font-medium mt-1.5"></p>
+              </div>
+            </div>
+
+            <div class="font-script text-4xl inv-primary-text">&amp;</div>
+
+            <!-- Wanita -->
+            <div class="space-y-3">
+              <div id="pv_bridePhotoWrap" class="w-36 h-36 mx-auto rounded-full overflow-hidden border-4 inv-border shadow-md transition-transform duration-500 hover:scale-105 is-visible" style="display: none;">
+                <img id="pv_bridePhoto" src="assets/foto-3.jpg" alt="Mempelai Wanita" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <h3 id="pv_brideFull" class="font-heading text-2xl font-bold">APT. Arif Nugroho Utomo, S. Farm</h3>
+                <p id="pv_brideParents" class="text-sm inv-muted mt-1.5 leading-relaxed">Putra pertama dari  Bapak H. Sugito dan Ibu Almh. Hj. Surip</p>
+                <p id="pv_brideIg" class="text-xs inv-primary-text font-medium mt-1.5"></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- COUNTDOWN & RANGKAIAN ACARA -->
+          <section id="sec_events" class="px-6 py-8 space-y-6 reveal-section scroll-mt-14 is-visible">
+            <div class="text-center space-y-1">
+              <p class="text-xs uppercase tracking-[0.25em] inv-primary-text font-bold">Save The Date</p>
+              <h2 class="font-heading text-3xl font-bold">Rangkaian Acara</h2>
+            </div>
+
+            <!-- Countdown Box -->
+            <div id="sec_countdown" class="grid grid-cols-4 gap-2 text-center is-visible" style="display: grid;">
+              <div class="p-3 rounded-2xl inv-card border inv-border shadow-sm">
+                <span id="cd_days" class="block font-heading text-2xl font-bold inv-primary-text">29</span>
+                <span class="text-xs inv-muted uppercase">Hari</span>
+              </div>
+              <div class="p-3 rounded-2xl inv-card border inv-border shadow-sm">
+                <span id="cd_hours" class="block font-heading text-2xl font-bold inv-primary-text">15</span>
+                <span class="text-xs inv-muted uppercase">Jam</span>
+              </div>
+              <div class="p-3 rounded-2xl inv-card border inv-border shadow-sm">
+                <span id="cd_minutes" class="block font-heading text-2xl font-bold inv-primary-text">07</span>
+                <span class="text-xs inv-muted uppercase">Menit</span>
+              </div>
+              <div class="p-3 rounded-2xl inv-card border inv-border shadow-sm">
+                <span id="cd_seconds" class="block font-heading text-2xl font-bold inv-primary-text">56</span>
+                <span class="text-xs inv-muted uppercase">Detik</span>
+              </div>
+            </div>
+
+            <!-- Card Akad -->
+            <div class="p-6 rounded-3xl inv-card border inv-border text-center space-y-3 shadow-sm transition-all duration-300 hover:shadow-md">
+              <div class="w-11 h-11 mx-auto rounded-full inv-soft-bg inv-primary-text flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="gem" aria-hidden="true" class="lucide lucide-gem w-5 h-5"><path d="M10.5 3 8 9l4 13 4-13-2.5-6"></path><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z"></path><path d="M2 9h20"></path></svg>
+              </div>
+              <h3 id="pv_akadTitle" class="font-heading text-2xl font-bold">Akad Nikah</h3>
+              <div class="space-y-1 text-sm">
+                <p id="pv_akadDate" class="font-bold">MINGGU, 27 DESEMBER 2026</p>
+                <p id="pv_akadTime" class="inv-primary-text font-semibold">PUKUL 09.00 S/D 10.00 WIB</p>
+              </div>
+              <div class="pt-2 border-t inv-border space-y-1">
+                <p id="pv_akadVenue" class="text-sm font-bold">DI KEDIAMAN MEMPELAI WANITA</p>
+                <p id="pv_akadAddress" class="text-sm inv-muted leading-relaxed">JL.MENOREH UTARA XI RT.08/RW.01, KEL. SAMPANGAN, KEC. GAJAHMUNGKUR, KOTA SEMARANG</p>
+              </div>
+              <div class="pt-2">
+                <a id="pv_akadMap" href="https://maps.app.goo.gl/N7PnGCFiNweDgx1P6" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl inv-primary-bg text-white text-sm font-semibold shadow-sm hover:opacity-90 active:scale-95 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin w-4 h-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>Lihat Lokasi Google Maps</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card Resepsi -->
+            <div id="sec_resepsi" class="p-6 rounded-3xl inv-card border inv-border text-center space-y-3 shadow-sm transition-all duration-300 hover:shadow-md" style="display: none;">
+              <div class="w-11 h-11 mx-auto rounded-full inv-soft-bg inv-primary-text flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="party-popper" aria-hidden="true" class="lucide lucide-party-popper w-5 h-5"><path d="M5.8 11.3 2 22l10.7-3.79"></path><path d="M4 3h.01"></path><path d="M22 8h.01"></path><path d="M15 2h.01"></path><path d="M22 20h.01"></path><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"></path><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"></path><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"></path><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"></path></svg>
+              </div>
+              <h3 id="pv_resepsiTitle" class="font-heading text-2xl font-bold">Resepsi Pernikahan</h3>
+              <div class="space-y-1 text-sm">
+                <p id="pv_resepsiDate" class="font-bold">MINGGU, 27 DESEMBER 2026</p>
+                <p id="pv_resepsiTime" class="inv-primary-text font-semibold">PUKUL 13.00 S/D 15.00 WIB</p>
+              </div>
+              <div class="pt-2 border-t inv-border space-y-1">
+                <p id="pv_resepsiVenue" class="text-sm font-bold">DI KEDIAMAN MEMPELAI WANITA</p>
+                <p id="pv_resepsiAddress" class="text-sm inv-muted leading-relaxed">JL.MENOREH UTARA XI RT.08/RW.01, KEL. SAMPANGAN, KEC. GAJAHMUNGKUR, KOTA SEMARANG</p>
+              </div>
+              <div class="pt-2">
+                <a id="pv_resepsiMap" href="https://maps.app.goo.gl/N7PnGCFiNweDgx1P6" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl inv-primary-bg text-white text-sm font-semibold shadow-sm hover:opacity-90 active:scale-95 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin w-4 h-4"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>Lihat Lokasi Google Maps</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- LOVE STORY -->
+          <section id="sec_story" class="px-6 py-8 space-y-5 reveal-section scroll-mt-14 is-visible" style="display: none;">
+            <div class="text-center space-y-1">
+              <p class="text-xs uppercase tracking-[0.25em] inv-primary-text font-bold">Our Journey</p>
+              <h2 class="font-heading text-3xl font-bold">Kisah Cinta Kami</h2>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-4 rounded-2xl inv-card border inv-border space-y-1.5 transition-transform duration-300 hover:translate-x-1">
+                <h4 id="pv_story1Title" class="text-sm font-bold inv-primary-text">Pertama Bertemu</h4>
+                <p id="pv_story1Desc" class="text-sm inv-muted leading-relaxed">Pertemuan tak terduga di sebuah acara seminar arsitektur dan bisnis di Semarang menjadi awal perkenalan kami.</p>
+              </div>
+              <div class="p-4 rounded-2xl inv-card border inv-border space-y-1.5 transition-transform duration-300 hover:translate-x-1">
+                <h4 id="pv_story2Title" class="text-sm font-bold inv-primary-text">Lamaran Keluarga</h4>
+                <p id="pv_story2Desc" class="text-sm inv-muted leading-relaxed">Dengan restu kedua orang tua, kami memantapkan hati untuk mengikat janji dalam acara khitbah yang hangat.</p>
+              </div>
+              <div class="p-4 rounded-2xl inv-card border inv-border space-y-1.5 transition-transform duration-300 hover:translate-x-1">
+                <h4 id="pv_story3Title" class="text-sm font-bold inv-primary-text">Menuju Pelaminan</h4>
+                <p id="pv_story3Desc" class="text-sm inv-muted leading-relaxed">InsyaAllah pada Desember 2026 kami melangkah ke babak baru membangun keluarga sakinah mawaddah warahmah.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- GALERI FOTO (KLIK FULLSCREEN TOGGLE) -->
+          <section id="sec_gallery" class="px-6 py-8 space-y-5 reveal-section scroll-mt-14 is-visible" style="display: none;">
+            <div class="text-center space-y-1">
+              <p class="text-xs uppercase tracking-[0.25em] inv-primary-text font-bold">Captured Moments</p>
+              <h2 class="font-heading text-3xl font-bold">Galeri Foto</h2>
+              <p class="text-xs inv-muted">Ketuk foto untuk memperbesar layar penuh</p>
+            </div>
+            <div id="pv_galleryGrid" class="grid grid-cols-3 gap-2">
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+1" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+1';" alt="Galeri 1" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+2" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+2';" alt="Galeri 2" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+3" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+3';" alt="Galeri 3" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+4" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+4';" alt="Galeri 4" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+5" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+5';" alt="Galeri 5" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+6" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+6';" alt="Galeri 6" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+7" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+7';" alt="Galeri 7" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="https://placehold.co/400x400/e7dfd3/78716c?text=Momen+8" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+8';" alt="Galeri 8" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            <div onclick="openGalleryLightbox(this.querySelector('img').src)" title="Klik untuk memperbesar" class="aspect-square rounded-2xl overflow-hidden border inv-border shadow-sm bg-amber-50 cursor-zoom-in">
+              <img src="assets/foto-12.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x400/e7dfd3/78716c?text=Momen+9';" alt="Galeri 9" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div></div>
+          </section>
+
+          <!-- AMPLOP DIGITAL / KIRIM HADIAH -->
+          <section id="sec_gift" class="px-6 py-8 space-y-5 reveal-section scroll-mt-14 is-visible" style="display: none;">
+            <div class="text-center space-y-2">
+              <p class="text-xs uppercase tracking-[0.25em] inv-primary-text font-bold">Wedding Gift</p>
+              <h2 class="font-heading text-3xl font-bold">Amplop Digital</h2>
+              <p class="text-sm inv-muted leading-relaxed">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
+            </div>
+
+            <div class="space-y-3">
+              <!-- Rekening 1 -->
+              <div class="p-5 rounded-3xl inv-card border inv-border shadow-sm space-y-3">
+                <div class="flex items-center justify-between">
+                  <span id="pv_bank1Name" class="text-base font-extrabold inv-primary-text tracking-wide">BANK BCA</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="credit-card" aria-hidden="true" class="lucide lucide-credit-card w-5 h-5 inv-muted"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line><path d="M6 14h2"></path></svg>
+                </div>
+                <div>
+                  <p id="pv_bank1Number" class="text-xl font-bold tracking-wider">0098765432</p>
+                  <p class="text-sm inv-muted">a.n. <span id="pv_bank1Holder" class="font-semibold">a.n. Prakadani Bagas Saputra</span></p>
+                </div>
+                <button type="button" onclick="copyTextById('pv_bank1Number')" class="w-full py-2.5 rounded-xl inv-soft-bg inv-primary-text text-sm font-bold flex items-center justify-center gap-1.5 hover:opacity-85 active:scale-95 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-4 h-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+                  <span>Salin Nomor Rekening</span>
+                </button>
+              </div>
+
+              <!-- Rekening 2 -->
+              <div id="sec_bank2" class="p-5 rounded-3xl inv-card border inv-border shadow-sm space-y-3 is-visible" style="display: none;">
+                <div class="flex items-center justify-between">
+                  <span id="pv_bank2Name" class="text-base font-extrabold inv-primary-text tracking-wide">BANK MANDIRI</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="credit-card" aria-hidden="true" class="lucide lucide-credit-card w-5 h-5 inv-muted"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line><path d="M6 14h2"></path></svg>
+                </div>
+                <div>
+                  <p id="pv_bank2Number" class="text-xl font-bold tracking-wider">1360012345678</p>
+                  <p class="text-sm inv-muted">a.n. <span id="pv_bank2Holder" class="font-semibold">a.n. Ayuwinda Maharani Putri</span></p>
+                </div>
+                <button type="button" onclick="copyTextById('pv_bank2Number')" class="w-full py-2.5 rounded-xl inv-soft-bg inv-primary-text text-sm font-bold flex items-center justify-center gap-1.5 hover:opacity-85 active:scale-95 transition">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-4 h-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+                  <span>Salin Nomor Rekening</span>
+                </button>
+              </div>
+
+              <!-- Alamat Kado Fisik -->
+              <div id="sec_giftAddress" class="p-4 rounded-2xl inv-card border inv-border text-center space-y-1.5 is-visible" style="display: none;">
+                <p class="text-sm font-bold inv-primary-text flex items-center justify-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="package" aria-hidden="true" class="lucide lucide-package w-4 h-4"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path><path d="M12 22V12"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><path d="m7.5 4.27 9 5.15"></path></svg>
+                  <span>Kirim Hadiah Fisik</span>
+                </p>
+                <p id="pv_giftAddressText" class="text-sm inv-muted leading-relaxed">Jl. Pandanaran No. 45, Mugassari, Kec. Semarang Selatan, Kota Semarang</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- RSVP & BUKU UCAPAN (TANPA CONTOH UCAPAN BAWAAN) -->
+          <section id="sec_rsvp" class="px-6 py-8 space-y-5 reveal-section scroll-mt-14 is-visible">
+            <div class="text-center space-y-1">
+              <p class="text-xs uppercase tracking-[0.25em] inv-primary-text font-bold">Wishes &amp; RSVP</p>
+              <h2 class="font-heading text-3xl font-bold">Ucapan &amp; Doa</h2>
+            </div>
+
+            <form onsubmit="submitGuestWish(event)" class="p-5 rounded-3xl inv-card border inv-border space-y-3 shadow-sm">
+              <input type="text" id="wishName" required="" placeholder="Nama Anda" class="w-full px-3.5 py-2.5 text-sm rounded-xl border inv-border bg-transparent focus:outline-none">
+              <select id="wishStatus" class="w-full px-3.5 py-2.5 text-sm rounded-xl border inv-border bg-white text-stone-800 focus:outline-none">
+                <option value="Hadir">Konfirmasi: InsyaAllah Hadir</option>
+                <option value="Tidak Hadir">Konfirmasi: Maaf Berhalangan Hadir</option>
+              </select>
+              <textarea id="wishMessage" rows="3" required="" placeholder="Tuliskan ucapan &amp; doa restu untuk kedua mempelai..." class="w-full px-3.5 py-2.5 text-sm rounded-xl border inv-border bg-transparent focus:outline-none"></textarea>
+              <button type="submit" class="w-full py-2.5 rounded-xl inv-primary-bg text-white text-sm font-bold shadow-sm hover:opacity-90 active:scale-95 transition">
+                Kirim Ucapan
+              </button>
+            </form>
+
+            <!-- Daftar Ucapan Tamu (Kosong secara default, muncul setelah tamu mengirim ucapan) -->
+            <div id="wishListContainer" class="space-y-2.5 max-h-64 overflow-y-auto pr-1"></div>
+          </section>
+
+          <!-- FOOTER PENUTUP -->
+          <footer class="px-6 pt-6 pb-8 text-center space-y-4 border-t inv-border reveal-section">
+            <p id="pv_closingText" class="text-sm inv-muted leading-relaxed">TERIMA KASIH ATAS DOA RESTU DAN KEHADIRANNYA, </p>
+            <h3 class="font-script text-4xl inv-primary-text">
+              <span id="pv_footerGroom">Sisma</span> &amp; <span id="pv_footerBride">Arif</span>
+            </h3>
+            <p class="text-xs uppercase tracking-widest inv-muted pt-3">Digital Invitation by DDG Studio</p>
+          </footer>
+
+        </div>
+
+        <!-- LIGHTBOX FULLSCREEN GALLERY OVERLAY (KLIK LAGI UNTUK KEMBALI KE GRID) -->
+        
+
+      
+  </div>
+  <div id="galleryLightbox" onclick="closeGalleryLightbox()" class="hidden fixed inset-0 z-50 bg-black/95 flex-col items-center justify-center p-4 cursor-zoom-out">
+    <img id="galleryLightboxImg" src="" alt="Preview Foto Fullscreen" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl" />
+    <p class="text-white/80 text-xs mt-4 tracking-wide bg-white/10 px-4 py-1.5 rounded-full">Ketuk foto / layar untuk kembali ke galeri</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
